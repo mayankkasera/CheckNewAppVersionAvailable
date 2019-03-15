@@ -10,12 +10,13 @@ import android.os.AsyncTask;
 import org.jsoup.Jsoup;
 
 /**
- * Created by jrvansuita on 17/09/15.
+ * Edited by Mayank kasera on 15/03/19
+ * Play Store Tag Problem Solve
  */
 public class CheckNewAppVersion extends AsyncTask<Void, Void, CheckNewAppVersion.Result> {
 
     private static final String REFERRER = "http://www.google.com";
-    private static final String DIV = "div[itemprop=softwareVersion]";
+    private static final String DIV = ".IQ1z0d .htlgb";
     private static final String USER_AGENT = "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6";
     private static final String PLAY_STORE_LINK = "http://play.google.com/store/apps/details?id=%s&hl=en";
 
@@ -50,12 +51,14 @@ public class CheckNewAppVersion extends AsyncTask<Void, Void, CheckNewAppVersion
                     .referrer(REFERRER)
                     .get()
                     .select(DIV)
-                    .first()
+                    .get(7)
                     .ownText();
+            
 
             result.setNewVersionCode(newVersion);
         } catch (Exception e) {
             //Handle this exception by your own way...
+            Log.i("imtiyaz", "doInBackground: "+e.toString());
         }
 
         return result;
